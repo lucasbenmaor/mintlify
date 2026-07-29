@@ -1,274 +1,315 @@
 ---
-title: "nocnoc Developer Hub"
+title: "nocnoc Integrations Hub"
 description: "Everything you need to integrate with nocnoc and start selling across Latin America."
 mode: "custom"
 ---
 
-<div style={{
-  background: "linear-gradient(180deg, #0061FC 0%, #2AA1F2 100%)",
-  minHeight: "calc(100vh - 150px)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  marginLeft: "-24px",
-  marginRight: "-24px",
-  marginTop: "-24px",
-  marginBottom: "-24px",
-  padding: "120px 40px",
-  textAlign: "center"
-}}>
+<div
+  style={{
+background: "linear-gradient(180deg, #0061FC 0%, #2AA1F2 100%)",
+minHeight: "calc(100vh - 150px)",
+display: "flex",
+alignItems: "center",
+justifyContent: "center",
+marginLeft: "-24px",
+marginRight: "-24px",
+marginTop: "-24px",
+marginBottom: "-24px",
+padding: "120px 40px",
+textAlign: "center"
+}}
+>
   <div style={{maxWidth: "900px"}}>
-    <h1 style={{
-      fontSize: "72px",
-      fontWeight: "700",
-      lineHeight: "1.05",
-      marginBottom: "28px",
-      fontFamily: "'Poppins', sans-serif"
-    }}>
-      <span style={{color: "#ffffff", whiteSpace: "nowrap"}}>One integration for your</span><br/>
+    <h1
+      style={{
+    fontSize: "72px",
+    fontWeight: "700",
+    lineHeight: "1.05",
+    marginBottom: "28px",
+    fontFamily: "'Poppins', sans-serif"
+  }}
+    >
+      <span style={{color: "#ffffff", whiteSpace: "nowrap"}}>One integration for your</span><br />
       <span style={{color: "#A4F9FF", whiteSpace: "nowrap"}}>entire nocnoc operation</span>
     </h1>
+
     <p style={{
-      fontSize: "22px",
-      color: "rgba(255,255,255,0.72)",
-      lineHeight: "1.6",
-      marginBottom: "48px",
-      maxWidth: "560px",
-      marginLeft: "auto",
-      marginRight: "auto",
-      fontFamily: "'Manrope', sans-serif",
-      fontWeight: "500"
-    }}>Connect your system to nocnoc using the method that works best for you.</p>
+        fontSize: "22px",
+        color: "rgba(255,255,255,0.72)",
+        lineHeight: "1.6",
+        marginBottom: "48px",
+        maxWidth: "560px",
+        marginLeft: "auto",
+        marginRight: "auto",
+        fontFamily: "'Manrope', sans-serif",
+        fontWeight: "500"
+      }}>Connect your system to nocnoc using the method that works best for you.</p>
+
     <div style={{display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap"}}>
       <a href="#integrations" onClick={(e) => { e.preventDefault(); document.getElementById('integrations').scrollIntoView({ behavior: 'smooth' }); }} style={{
-        background: "#ffffff",
-        color: "#0061FC",
-        fontWeight: "700",
-        fontSize: "18px",
-        padding: "16px 40px",
-        borderRadius: "50px",
-        textDecoration: "none",
-        fontFamily: "'Manrope', sans-serif",
-        cursor: "pointer"
-      }}>Get started →</a>
+            background: "#ffffff",
+            color: "#0061FC",
+            fontWeight: "700",
+            fontSize: "18px",
+            padding: "16px 40px",
+            borderRadius: "50px",
+            textDecoration: "none",
+            fontFamily: "'Manrope', sans-serif",
+            cursor: "pointer"
+          }}>Get started →</a>
       <a href="/api/api-reference/overview" style={{
-        background: "transparent",
-        color: "#ffffff",
-        fontSize: "18px",
-        fontWeight: "600",
-        padding: "16px 40px",
-        borderRadius: "50px",
-        border: "1.5px solid rgba(255,255,255,0.45)",
-        textDecoration: "none",
-        fontFamily: "'Manrope', sans-serif"
-      }}>View API Reference</a>
+            background: "transparent",
+            color: "#ffffff",
+            fontSize: "18px",
+            fontWeight: "600",
+            padding: "16px 40px",
+            borderRadius: "50px",
+            border: "1.5px solid rgba(255,255,255,0.45)",
+            textDecoration: "none",
+            fontFamily: "'Manrope', sans-serif"
+          }}>View API Reference</a>
     </div>
   </div>
 </div>
 
 <div id="integrations" style={{ textAlign: 'center', padding: '120px 24px 8px' }}>
-  <h2 style={{
-    fontSize: '36px',
-    fontWeight: '700',
-    color: '#0f172a',
-    margin: '0 0 16px',
-    lineHeight: '1.15',
-  }}>
+  <h2
+    style={{
+  fontSize: '36px',
+  fontWeight: '700',
+  color: '#0f172a',
+  margin: '0 0 16px',
+  lineHeight: '1.15',
+}}
+  >
     Get to know{' '}
     <span style={{ color: '#1a6cf4' }}>our integrations</span>
   </h2>
-  <p style={{
-    fontSize: '16px',
-    color: '#6b7280',
-    margin: '0 auto 0',
-    maxWidth: '700px',
-    lineHeight: '1.65',
-  }}>
+
+  <p
+    style={{
+  fontSize: '16px',
+  color: '#6b7280',
+  margin: '0 auto 0',
+  maxWidth: '700px',
+  lineHeight: '1.65',
+}}
+  >
     Select your integration and find everything you need to get connected.
   </p>
 </div>
 
 <div style={{ marginTop: '32px', paddingBottom: '80px' }}>
+  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 392px)', gap: '16px', justifyContent: 'center' }}>
+    {/* Direct API */}
 
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 392px)', gap: '16px', justifyContent: 'center' }}>
+    <a
+      href="/api/introduction"
+      style={{
+  textDecoration: 'none',
+  border: '1px solid #e5e7eb',
+  borderRadius: '14px',
+  overflow: 'hidden',
+  display: 'block',
+  color: 'inherit'
+}}
+    >
+      <div
+        style={{
+    background: '#1a6cf4',
+    padding: '24px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '144px'
+  }}
+      >
+        <img src="https://cdn.jsdelivr.net/npm/@tabler/icons/icons/api.svg" style={{ width: '54px', height: '54px', filter: 'brightness(0) invert(1)', pointerEvents: 'none' }} alt="API" />
+      </div>
 
-  {/* Direct API */}
-  <a href="/api/introduction" style={{
-    textDecoration: 'none',
-    border: '1px solid #e5e7eb',
-    borderRadius: '14px',
-    overflow: 'hidden',
-    display: 'block',
-    color: 'inherit'
-  }}>
-    <div style={{
-      background: '#1a6cf4',
-      padding: '24px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '144px'
-    }}>
-      <img src="https://cdn.jsdelivr.net/npm/@tabler/icons/icons/api.svg"
-        style={{ width: '54px', height: '54px', filter: 'brightness(0) invert(1)', pointerEvents: 'none' }}
-        alt="API" />
-    </div>
-    <div style={{ padding: '18px 20px 8px' }}>
-      <p style={{ fontWeight: '600', fontSize: '15px', margin: '0 0 6px', color: '#0f172a' }}>Direct API</p>
-      <p style={{ fontSize: '13px', color: '#6b7280', margin: '0 0 14px', lineHeight: '1.55' }}>
-        Full control via REST. Publish products, sync stock and manage orders programmatically from any system.
-      </p>
-    </div>
-    <div style={{ borderTop: '1px solid #f3f4f6', padding: '8px 20px 16px' }}>
-      <a href="/api/quickstart" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Get started <span>→</span></a>
-      <a href="/api/api-reference/overview" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>API reference <span>→</span></a>
-    </div>
-  </a>
+      <div style={{ padding: '18px 20px 8px' }}>
+        <p style={{ fontWeight: '600', fontSize: '15px', margin: '0 0 6px', color: '#0f172a' }}>Direct API</p>
 
-  {/* Shopify */}
-  <a href="/shopify/introduction" style={{
-    textDecoration: 'none',
-    border: '1px solid #e5e7eb',
-    borderRadius: '14px',
-    overflow: 'hidden',
-    display: 'block',
-    color: 'inherit'
-  }}>
-    <div style={{
-      background: '#1a6cf4',
-      padding: '24px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '144px'
-    }}>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Shopify_logo_2018.svg"
-        style={{ width: '96px', height: '96px', filter: 'brightness(0) invert(1)', objectFit: 'contain', pointerEvents: 'none' }}
-        alt="Shopify" />
-    </div>
-    <div style={{ padding: '18px 20px 8px' }}>
-      <p style={{ fontWeight: '600', fontSize: '15px', margin: '0 0 6px', color: '#0f172a' }}>Shopify</p>
-      <p style={{ fontSize: '13px', color: '#6b7280', margin: '0 0 14px', lineHeight: '1.55' }}>
-        Connect your Shopify store in minutes. Catalog and orders sync automatically via webhooks — no custom dev needed.
-      </p>
-    </div>
-    <div style={{ borderTop: '1px solid #f3f4f6', padding: '8px 20px 16px' }}>
-      <a href="/shopify/setup" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Set up integration <span>→</span></a>
-      <a href="/shopify/shipping-orders" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Manage orders <span>→</span></a>
-    </div>
-  </a>
+        <p style={{ fontSize: '13px', color: '#6b7280', margin: '0 0 14px', lineHeight: '1.55' }}>
+          Full control via REST. Publish products, sync stock and manage orders programmatically from any system.
+        </p>
+      </div>
 
-</div>
+      <div style={{ borderTop: '1px solid #f3f4f6', padding: '8px 20px 16px' }}>
+        <a href="/api/quickstart" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Get started <span>→</span></a>
+        <a href="/api/api-reference/overview" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>API reference <span>→</span></a>
+      </div>
+    </a>
 
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 392px)', gap: '16px', marginTop: '16px', justifyContent: 'center' }}>
+    {/* Shopify */}
 
-  {/* GoFlow */}
-  <a href="/goflow/introduction" style={{
-    textDecoration: 'none',
-    border: '1px solid #e5e7eb',
-    borderRadius: '14px',
-    overflow: 'hidden',
-    display: 'block',
-    color: 'inherit'
-  }}>
-    <div style={{
-      background: '#1a6cf4',
-      padding: '24px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '144px'
-    }}>
-      <img src="https://goflow.com/img/theme/logo.svg?v=2"
-        style={{ width: '96px', height: '96px', filter: 'brightness(0) invert(1)', objectFit: 'contain', pointerEvents: 'none' }}
-        alt="GoFlow" />
-    </div>
-    <div style={{ padding: '18px 20px 8px' }}>
-      <p style={{ fontWeight: '600', fontSize: '15px', margin: '0 0 6px', color: '#0f172a' }}>GoFlow</p>
-      <p style={{ fontSize: '13px', color: '#6b7280', margin: '0 0 14px', lineHeight: '1.55' }}>
-        Already using GoFlow? Connect your OMS natively and manage listings, orders and pricing from a single place.
-      </p>
-    </div>
-    <div style={{ borderTop: '1px solid #f3f4f6', padding: '8px 20px 16px' }}>
-      <a href="/goflow/setup" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Set up integration <span>→</span></a>
-      <a href="/goflow/managing-orders" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Manage orders <span>→</span></a>
-    </div>
-  </a>
+    <a
+      href="/shopify/introduction"
+      style={{
+  textDecoration: 'none',
+  border: '1px solid #e5e7eb',
+  borderRadius: '14px',
+  overflow: 'hidden',
+  display: 'block',
+  color: 'inherit'
+}}
+    >
+      <div
+        style={{
+    background: '#1a6cf4',
+    padding: '24px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '144px'
+  }}
+      >
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Shopify_logo_2018.svg" style={{ width: '96px', height: '96px', filter: 'brightness(0) invert(1)', objectFit: 'contain', pointerEvents: 'none' }} alt="Shopify" />
+      </div>
 
-  {/* Sellercloud */}
-  <a href="/sellercloud/setup" style={{
-    textDecoration: 'none',
-    border: '1px solid #e5e7eb',
-    borderRadius: '14px',
-    overflow: 'hidden',
-    display: 'block',
-    color: 'inherit'
-  }}>
-    <div style={{
-      background: '#1a6cf4',
-      padding: '24px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '144px'
-    }}>
-      <img src="https://sellercloud.com/wp-content/uploads/2025/04/Descartes_Sellercloud_Final_RGB_White.svg"
-        style={{ width: '96px', height: '96px', objectFit: 'contain', pointerEvents: 'none' }}
-        alt="Sellercloud" />
-    </div>
-    <div style={{ padding: '18px 20px 8px' }}>
-      <p style={{ fontWeight: '600', fontSize: '15px', margin: '0 0 6px', color: '#0f172a' }}>Sellercloud</p>
-      <p style={{ fontSize: '13px', color: '#6b7280', margin: '0 0 14px', lineHeight: '1.55' }}>
-        Sync inventory and orders with nocnoc via scheduled FTP exports. Templates provided — no custom development needed.
-      </p>
-    </div>
-    <div style={{ borderTop: '1px solid #f3f4f6', padding: '8px 20px 16px' }}>
-      <a href="/sellercloud/setup" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Set up integration <span>→</span></a>
-      <a href="/sellercloud/setup" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Download templates <span>→</span></a>
-    </div>
-  </a>
+      <div style={{ padding: '18px 20px 8px' }}>
+        <p style={{ fontWeight: '600', fontSize: '15px', margin: '0 0 6px', color: '#0f172a' }}>Shopify</p>
 
-  {/* SFTP */}
-  <a href="/sftp/introduction" style={{
-    textDecoration: 'none',
-    border: '1px solid #e5e7eb',
-    borderRadius: '14px',
-    overflow: 'hidden',
-    display: 'block',
-    color: 'inherit'
-  }}>
-    <div style={{
-      background: '#1a6cf4',
-      padding: '24px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '144px'
-    }}>
-      <img src="https://cdn.jsdelivr.net/npm/@tabler/icons/icons/file-upload.svg"
-        style={{ width: '54px', height: '54px', filter: 'brightness(0) invert(1)', pointerEvents: 'none' }}
-        alt="SFTP" />
-    </div>
-    <div style={{ padding: '18px 20px 8px' }}>
-      <p style={{ fontWeight: '600', fontSize: '15px', margin: '0 0 6px', color: '#0f172a' }}>SFTP</p>
-      <p style={{ fontSize: '13px', color: '#6b7280', margin: '0 0 14px', lineHeight: '1.55' }}>
-        Connect any platform that supports file-based data exchange. Upload inventory and tracking files, receive orders and cancellations automatically.
-      </p>
-    </div>
-    <div style={{ borderTop: '1px solid #f3f4f6', padding: '8px 20px 16px' }}>
-      <a href="/sftp/introduction" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>How it works <span>→</span></a>
-      <a href="/sftp/setup" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Set up integration <span>→</span></a>
-    </div>
-  </a>
+        <p style={{ fontSize: '13px', color: '#6b7280', margin: '0 0 14px', lineHeight: '1.55' }}>
+          Connect your Shopify store in minutes. Catalog and orders sync automatically via webhooks — no custom dev needed.
+        </p>
+      </div>
 
-</div>
+      <div style={{ borderTop: '1px solid #f3f4f6', padding: '8px 20px 16px' }}>
+        <a href="/shopify/setup" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Set up integration <span>→</span></a>
+        <a href="/shopify/shipping-orders" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Manage orders <span>→</span></a>
+      </div>
+    </a>
+  </div>
 
-<div style={{ marginTop: '48px', paddingBottom: '20px' }}>
-  <hr style={{ border: 'none', borderTop: '1px solid rgba(0,0,0,0.08)', margin: '0 0 24px' }} />
-  <p style={{ textAlign: 'center', margin: 0, fontSize: '14px', color: '#9ca3af' }}>
-    Don't see your platform?{' '}
-    <a href="/contact" style={{ color: '#1a6cf4', textDecoration: 'underline' }}>Contact us</a>
-  </p>
-</div>
+  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 392px)', gap: '16px', marginTop: '16px', justifyContent: 'center' }}>
+    {/* GoFlow */}
 
+    <a
+      href="/goflow/introduction"
+      style={{
+  textDecoration: 'none',
+  border: '1px solid #e5e7eb',
+  borderRadius: '14px',
+  overflow: 'hidden',
+  display: 'block',
+  color: 'inherit'
+}}
+    >
+      <div
+        style={{
+    background: '#1a6cf4',
+    padding: '24px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '144px'
+  }}
+      >
+        <img src="https://goflow.com/img/theme/logo.svg?v=2" style={{ width: '96px', height: '96px', filter: 'brightness(0) invert(1)', objectFit: 'contain', pointerEvents: 'none' }} alt="GoFlow" />
+      </div>
+
+      <div style={{ padding: '18px 20px 8px' }}>
+        <p style={{ fontWeight: '600', fontSize: '15px', margin: '0 0 6px', color: '#0f172a' }}>GoFlow</p>
+
+        <p style={{ fontSize: '13px', color: '#6b7280', margin: '0 0 14px', lineHeight: '1.55' }}>
+          Already using GoFlow? Connect your OMS natively and manage listings, orders and pricing from a single place.
+        </p>
+      </div>
+
+      <div style={{ borderTop: '1px solid #f3f4f6', padding: '8px 20px 16px' }}>
+        <a href="/goflow/setup" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Set up integration <span>→</span></a>
+        <a href="/goflow/managing-orders" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Manage orders <span>→</span></a>
+      </div>
+    </a>
+
+    {/* Sellercloud */}
+
+    <a
+      href="/sellercloud/setup"
+      style={{
+  textDecoration: 'none',
+  border: '1px solid #e5e7eb',
+  borderRadius: '14px',
+  overflow: 'hidden',
+  display: 'block',
+  color: 'inherit'
+}}
+    >
+      <div
+        style={{
+    background: '#1a6cf4',
+    padding: '24px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '144px'
+  }}
+      >
+        <img src="https://sellercloud.com/wp-content/uploads/2025/04/Descartes_Sellercloud_Final_RGB_White.svg" style={{ width: '96px', height: '96px', objectFit: 'contain', pointerEvents: 'none' }} alt="Sellercloud" />
+      </div>
+
+      <div style={{ padding: '18px 20px 8px' }}>
+        <p style={{ fontWeight: '600', fontSize: '15px', margin: '0 0 6px', color: '#0f172a' }}>Sellercloud</p>
+
+        <p style={{ fontSize: '13px', color: '#6b7280', margin: '0 0 14px', lineHeight: '1.55' }}>
+          Sync inventory and orders with nocnoc via scheduled FTP exports. Templates provided — no custom development needed.
+        </p>
+      </div>
+
+      <div style={{ borderTop: '1px solid #f3f4f6', padding: '8px 20px 16px' }}>
+        <a href="/sellercloud/setup" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Set up integration <span>→</span></a>
+        <a href="/sellercloud/setup" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Download templates <span>→</span></a>
+      </div>
+    </a>
+
+    {/* SFTP */}
+
+    <a
+      href="/sftp/introduction"
+      style={{
+  textDecoration: 'none',
+  border: '1px solid #e5e7eb',
+  borderRadius: '14px',
+  overflow: 'hidden',
+  display: 'block',
+  color: 'inherit'
+}}
+    >
+      <div
+        style={{
+    background: '#1a6cf4',
+    padding: '24px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '144px'
+  }}
+      >
+        <img src="https://cdn.jsdelivr.net/npm/@tabler/icons/icons/file-upload.svg" style={{ width: '54px', height: '54px', filter: 'brightness(0) invert(1)', pointerEvents: 'none' }} alt="SFTP" />
+      </div>
+
+      <div style={{ padding: '18px 20px 8px' }}>
+        <p style={{ fontWeight: '600', fontSize: '15px', margin: '0 0 6px', color: '#0f172a' }}>SFTP</p>
+
+        <p style={{ fontSize: '13px', color: '#6b7280', margin: '0 0 14px', lineHeight: '1.55' }}>
+          Connect any platform that supports file-based data exchange. Upload inventory and tracking files, receive orders and cancellations automatically.
+        </p>
+      </div>
+
+      <div style={{ borderTop: '1px solid #f3f4f6', padding: '8px 20px 16px' }}>
+        <a href="/sftp/introduction" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>How it works <span>→</span></a>
+        <a href="/sftp/setup" style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: '13px', color: '#1a6cf4', fontWeight: '500', textDecoration: 'none' }}>Set up integration <span>→</span></a>
+      </div>
+    </a>
+  </div>
+
+  <div style={{ marginTop: '48px', paddingBottom: '20px' }}>
+    <hr style={{ border: 'none', borderTop: '1px solid rgba(0,0,0,0.08)', margin: '0 0 24px' }} />
+
+    <p style={{ textAlign: 'center', margin: 0, fontSize: '14px', color: '#9ca3af' }}>
+      Don't see your platform?{' '}
+      <a href="/contact" style={{ color: '#1a6cf4', textDecoration: 'underline' }}>Contact us</a>
+    </p>
+  </div>
 </div>
