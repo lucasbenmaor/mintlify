@@ -65,17 +65,20 @@ description: "Creates a new product and adds it to your catalog. Requires full p
   Product description to be published. Cannot be empty.
 </ParamField>
 
-<ParamField body="package_dimensions" type="object">
+<ParamField body="package_dimensions" type="object" required>
   Dimensions of the package. Contains `size` (object with `unit`, `length`, `width`, `height`) and
   `weight` (object with `unit`, `value`). Size units: `cm`, `inch`, `inches`, `mm`. Weight units:
-  `kg`, `lb`, `gram`, `kilogram`, `pound`.
-
-  Sending accurate dimensions is strongly recommended: without them we estimate shipping costs, which
-  affects how your product is priced and published.
+  `kg`, `lb`, `gram`, `kilogram`, `pound`. Every value must be greater than 0.
 </ParamField>
 
-<ParamField body="product_dimensions" type="object">
+<ParamField body="product_dimensions" type="object" required>
   Dimensions of the product itself. Same structure as `package_dimensions`.
+
+  <Note>
+    Both `package_dimensions` and `product_dimensions` must be sent, and both need a valid `size`. We
+    use the two together to work out the shipping weight, so sending only one is not enough — the
+    product is rejected.
+  </Note>
 </ParamField>
 
 <ParamField body="images" type="array">
