@@ -1,6 +1,6 @@
 ---
 title: "Create product by ASIN"
-api: "POST https://live.nocnocstore.com/api/v2/products/"
+api: "POST https://live.nocnocstore.com/api/v2/products"
 description: "Creating a product from an Amazon ASIN. Replaced by Create product on August 25, 2026."
 ---
 
@@ -43,7 +43,8 @@ curl -X POST https://live.nocnocstore.com/api/v2/products \
 ```
 
 An ASIN is alphanumeric and exactly 10 characters. You can send it alongside other identifier types
-in the same request, for example `{ "asin": ["B00QAIV7V2"], "gtin": ["4901234567890"] }`.
+in the same request, for example `{ "asin": ["B00QAIV7V2"], "gtin": ["4901234567890"] }`. If you send
+more than one ASIN, only the first one is used to build the product.
 
 See [Create product](/api/api-reference/products/create-product) for the full list of parameters,
 the response format and the error shapes.
