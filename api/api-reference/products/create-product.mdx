@@ -182,33 +182,12 @@ curl -X POST https://live.nocnocstore.com/api/v2/products \
 }
 ```
 
-```json 400 Field check
+```json 400
 {
   "error": "Validation failed",
   "fields": {
     "internationalIds": "At least one international identifier type is required."
   }
-}
-```
-
-```json 400 Business rule
-{
-  "code": 400,
-  "message": "Invalid Request Payload.",
-  "errors": [
-    "GTIN identifier '123' must be numeric and between 12 and 14 digits.",
-    "Invalid condition: USED. Valid values: NEW, REFURBISHED_A_PLUS, REFURBISHED_A, OPEN_BOX"
-  ]
-}
-```
-
-```json 400 Already exists
-{
-  "code": 400,
-  "message": "Invalid Request Payload.",
-  "errors": [
-    "A seller_catalog with sku 'SKU-001' already exists for this seller."
-  ]
 }
 ```
 
@@ -248,7 +227,20 @@ fix what is reported and retry the same request.
 {
   "code": 400,
   "message": "Invalid Request Payload.",
-  "errors": ["GTIN identifier '123' must be numeric and between 12 and 14 digits."]
+  "errors": [
+    "GTIN identifier '123' must be numeric and between 12 and 14 digits.",
+    "Invalid condition: USED. Valid values: NEW, REFURBISHED_A_PLUS, REFURBISHED_A, OPEN_BOX"
+  ]
+}
+```
+
+A SKU you already created comes back in that same shape:
+
+```json
+{
+  "code": 400,
+  "message": "Invalid Request Payload.",
+  "errors": ["A seller_catalog with sku 'SKU-001' already exists for this seller."]
 }
 ```
 
