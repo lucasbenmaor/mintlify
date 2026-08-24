@@ -98,6 +98,9 @@ description: "Creates a new product and adds it to your catalog. Requires full p
 
 <ParamField body="images" type="array">
   Array of image objects, each with a `source_url` field. Maximum 10.
+
+  The response returns this field in a different shape: a flat array of URL strings, not the objects
+  you sent.
 </ParamField>
 
 <ParamField body="currency_code" type="string">
@@ -179,7 +182,7 @@ curl -X POST https://live.nocnocstore.com/api/v2/products \
 }
 ```
 
-```json 400
+```json 400 Field check
 {
   "error": "Validation failed",
   "fields": {
@@ -188,7 +191,7 @@ curl -X POST https://live.nocnocstore.com/api/v2/products \
 }
 ```
 
-```json 400
+```json 400 Business rule
 {
   "code": 400,
   "message": "Invalid Request Payload.",
@@ -199,17 +202,7 @@ curl -X POST https://live.nocnocstore.com/api/v2/products \
 }
 ```
 
-```json 400
-{
-  "code": 400,
-  "message": "Invalid Request Payload.",
-  "errors": [
-    "Identifier GTIN '4901234567890' is already registered for this seller with condition NEW."
-  ]
-}
-```
-
-```json 400
+```json 400 Already exists
 {
   "code": 400,
   "message": "Invalid Request Payload.",
@@ -262,7 +255,17 @@ fix what is reported and retry the same request.
 In this second shape `message` is always `Invalid Request Payload.`; the detail is in `errors`, with
 one entry per problem found. Format problems are reported first: if any of them is present you will
 not see the duplicate-identifier check in the same response, so fix the format and send the request
-again to find out whether the identifier is free.
+again to find out whether the identifier is free:
+
+```json
+{
+  "code": 400,
+  "message": "Invalid Request Payload.",
+  "errors": [
+    "Identifier GTIN '4901234567890' is already registered for this seller with condition NEW."
+  ]
+}
+```
 
 ### Checks that run after you get the response
 
