@@ -1,47 +1,25 @@
 ---
 title: "Create product by ASIN"
 api: "POST https://live.nocnocstore.com/api/v2/products/"
-description: "Creates a new product using an Amazon ASIN to auto-populate product data."
+description: "Creating a product from an Amazon ASIN. Replaced by Create product on August 25, 2026."
 ---
 
-<Note>Requests go to the live environment — all actions are real.</Note>
+<Warning>
+  **Starting August 25, 2026**, creating a product from an ASIN alone is no longer supported. The
+  ASIN becomes one more universal identifier, and we no longer auto-populate the product data from
+  it — so `title`, `description` and `condition` must be sent with the request.
 
-## Authorization
+  Use [Create product](/api/api-reference/products/create-product) and put your ASIN inside
+  `international_ids`, exactly as shown below. Update your integration before that date to avoid
+  failed creations. If you have any questions, reach out to your account manager.
+</Warning>
 
-<ParamField header="X-Api-Key" type="string" required>
-  Your seller API key. Provided by your nocnoc account manager.
-</ParamField>
+## What to send instead
 
-## Body parameters
-
-<ParamField body="sku" type="string" required>
-  Alphanumeric unique code for the product. Between 1 and 45 characters.
-</ParamField>
-
-<ParamField body="international_ids" type="object" required>
-  Must include `asin` as an array of strings. Example: `{"asin": ["B00QAIV7V2"]}`.
-</ParamField>
-
-<ParamField body="available_quantity" type="integer" required>
-  Stock quantity. Between 0 and 9999.
-</ParamField>
-
-<ParamField body="price" type="number" required>
-  Price of the product. Up to 10 integer digits and 2 decimal places.
-</ParamField>
-
-<ParamField body="currency_code" type="string" required>
-  Currency code (ISO). Currently only `USD` is supported.
-</ParamField>
-
-## Returns
-
-The created product object with data populated from the Amazon ASIN.
-
-## Example request
+Same endpoint, same ASIN — the difference is that the product data now travels with the request:
 
 ```bash
-curl -X POST https://live.nocnocstore.com/api/v2/products/ \
+curl -X POST https://live.nocnocstore.com/api/v2/products \
   -H "X-Api-Key: YOUR_SELLER_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -49,34 +27,15 @@ curl -X POST https://live.nocnocstore.com/api/v2/products/ \
     "international_ids": { "asin": ["B00QAIV7V2"] },
     "available_quantity": 10,
     "price": 100,
-    "currency_code": "USD"
+    "currency_code": "USD",
+    "condition": "NEW",
+    "title": "Product Title",
+    "description": "Product description"
   }'
 ```
 
-<ResponseExample>
-```json 200
-{
-  "sku": "MY-SKU-002",
-  "title": "Product title from Amazon",
-  "brand": "Brand from Amazon",
-  "price": 49.99,
-  "currency_code": "USD",
-  "available_quantity": 50,
-  "status": "active"
-}
-```
+An ASIN is alphanumeric and exactly 10 characters. You can send it alongside other identifier types
+in the same request, for example `{ "asin": ["B00QAIV7V2"], "gtin": ["4901234567890"] }`.
 
-```json 400
-{
-  "code": 400,
-  "message": "Sku already exists."
-}
-```
-
-```json 401
-{
-  "code": 401,
-  "message": "Unauthorized"
-}
-```
-</ResponseExample>
+See [Create product](/api/api-reference/products/create-product) for the full list of parameters,
+the response format and the error shapes.

@@ -6,6 +6,10 @@
     "dark": "/logo/nocnoc-dark.svg"
   },
   "favicon": "/favicon.svg",
+  "banner": {
+    "content": "**Starting August 25, 2026**, creating a product requires a universal identifier (EAN, UPC, GTIN or ASIN) plus title, description and condition. [See what changes](/api/api-reference/products/create-product).",
+    "dismissible": true
+  },
   "colors": {
     "primary": "#0061FC",
     "light": "#A4F9FF",
