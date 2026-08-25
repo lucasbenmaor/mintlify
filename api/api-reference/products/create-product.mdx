@@ -6,9 +6,19 @@ description: "Creates a new product and adds it to your catalog. Requires full p
 
 <Note>Requests go to the live environment — all actions are real.</Note>
 
-<Note>
-  If you have an Amazon ASIN, use [Create product by ASIN](/api/api-reference/products/create-product-asin) instead — it auto-populates product data automatically.
-</Note>
+<Warning>
+  **Starting August 25, 2026**, this page describes how product creation works. Three things change
+  from the previous contract:
+
+  - **`international_ids` is now required.** A product sent without a universal identifier (EAN, UPC,
+    GTIN or ASIN) is rejected.
+  - **`condition` is now required**, and only `NEW`, `REFURBISHED_A` and `OPEN_BOX` are accepted.
+  - **The response no longer returns `seller_product_id`.** It confirms the product was accepted, not
+    that it finished being created.
+
+  Update your integration before that date to avoid failed creations. If you have any questions,
+  reach out to your account manager.
+</Warning>
 
 ## Authorization
 
@@ -19,64 +29,107 @@ description: "Creates a new product and adds it to your catalog. Requires full p
 ## Body parameters
 
 <ParamField body="sku" type="string" required>
-  Alphanumeric unique code for the product. Between 1 and 45 characters.
+  Alphanumeric unique code for the product. Between 1 and 45 characters, and it must start with a
+  letter or a number.
+
+  Spaces are removed from the value before it is stored, so `SKU 001` is stored as `SKU001`. Send it
+  without spaces: every other endpoint addresses the product by the stored value, so a SKU sent with
+  spaces will not be found afterwards.
 </ParamField>
 
-<ParamField body="brand" type="string" required>
-  Brand of the product. Between 1 and 45 characters.
+<ParamField body="international_ids" type="object" required>
+  Universal identifiers for the product. At least one type with at least one value is required.
+
+  Supported types: `gtin`, `ean` and `upc` (numeric, 12 to 14 digits), and `asin` (alphanumeric,
+  exactly 10 characters). Type names are case-insensitive, and spaces inside a value are removed
+  before it is validated and stored. You can send more than one type in the same request. Example:
+  `{ "gtin": ["4901234567890"], "asin": ["B00QAIV7V2"] }`.
+
+  `gtin`, `ean` and `upc` are the same identifier downstream — sending a value under two of those
+  types adds no information. Of the ASINs you send, only the first one is used to build the product.
+
+  An identifier can only be used once per condition across your catalog. Reusing the same identifier
+  with the same condition on a different SKU is rejected. Reusing it with a different condition is
+  accepted by this endpoint, but the product is not created afterwards — see
+  [Checks that run after you get the response](#checks-that-run-after-you-get-the-response).
 </ParamField>
 
 <ParamField body="available_quantity" type="integer" required>
-  Stock quantity. Between 0 and 9999.
+  Stock quantity. Must be 0 or greater, and 9999 at most.
 </ParamField>
 
 <ParamField body="price" type="number" required>
-  Price of the product. Up to 10 integer digits and 2 decimal places.
+  Price of the product, always in USD. Between `0.01` and `9998.99`, with up to 2 decimal places.
 </ParamField>
 
-<ParamField body="currency_code" type="string" required>
-  Currency code (ISO). Currently only `USD` is supported.
+<ParamField body="condition" type="string" required>
+  Product condition. One of: `NEW`, `REFURBISHED_A`, `OPEN_BOX`. Case-insensitive.
+
+  `REFURBISHED_A_PLUS` is listed as valid in our validation messages, but it cannot be published —
+  do not use it.
 </ParamField>
 
 <ParamField body="title" type="string" required>
-  Product title to be published.
+  Product title to be published. Between 1 and 255 characters. Leading and trailing spaces are
+  trimmed.
 </ParamField>
 
 <ParamField body="description" type="string" required>
-  Product description to be published.
+  Product description to be published. Cannot be empty. Leading and trailing spaces are trimmed.
 </ParamField>
 
-<ParamField body="description_language" type="string" required>
-  Language of the description. Currently only `en` is supported.
+<ParamField body="package_dimensions" type="object">
+  Dimensions of the package. Contains `size` (object with `unit`, `length`, `width`, `height`) and
+  `weight` (object with `unit`, `value`). Size units: `cm`, `inch`, `inches`, `mm`. Weight units:
+  `kg`, `lb`, `gram`, `kilogram`, `pound`. Every value must be greater than 0.
 </ParamField>
 
-<ParamField body="condition" type="string">
-  Product condition. One of: `NEW`, `USED`, `OPEN_BOX`, `REFURBISHED_A`, `REFURBISHED_B`, `REFURBISHED_C`, `REFURBISHED_D`. Defaults to `NEW`.
-</ParamField>
-
-<ParamField body="package_dimensions" type="object" required>
-  Dimensions of the package. Contains `size` (object with `unit`, `length`, `width`, `height`) and `weight` (object with `unit`, `value`). Size units: `cm`, `inch`, `inches`, `mm`. Weight units: `kg`, `lb`, `gram`, `kilogram`, `pound`.
-</ParamField>
-
-<ParamField body="product_dimensions" type="object" required>
+<ParamField body="product_dimensions" type="object">
   Dimensions of the product itself. Same structure as `package_dimensions`.
+
+  <Note>
+    Both objects are optional because we complete them from the Amazon listing matched by the
+    identifier you send: Amazon's values win, and whatever it does not carry is filled in from your
+    request. Send them when you can anyway — if we cannot match your product, or the match has no
+    dimensions, there is no shipping weight and the product is not created. See
+    [Checks that run after you get the response](#checks-that-run-after-you-get-the-response).
+  </Note>
 </ParamField>
 
-<ParamField body="images" type="array" required>
-  Array of image objects, each with a `source_url` field. Minimum 1, maximum 10.
+<ParamField body="images" type="array">
+  Array of image objects, each with a `source_url` field. Maximum 10.
+
+  The response returns this field in a different shape: a flat array of URL strings, not the objects
+  you sent.
 </ParamField>
 
-<ParamField body="international_ids" type="object">
-  International identifiers. Contains `gtin` (array of strings — Global Trade Item Number, e.g. EAN, UPC).
+<ParamField body="currency_code" type="string">
+  Currency code (ISO). Only `USD` is supported. Defaults to `USD` when omitted.
 </ParamField>
 
-<ParamField body="attributes" type="array">
-  Additional product attributes. Each object has `type` (one of: `COLOR`, `SIZE`) and `value` (string).
+<ParamField body="description_language" type="string">
+  Language of the description. Only `en` is supported. Defaults to `en` when omitted.
 </ParamField>
+
+<Note>
+  Fields that are not listed above are ignored. The product data we publish is taken from the nocnoc
+  catalog entry matched by the identifier you send.
+</Note>
 
 ## Returns
 
-The created product object with all submitted fields confirmed.
+`201 Created` with the product data you submitted, plus a `status` field.
+
+`status: "PENDING"` means the product passed validation and was accepted — creation then continues on
+our side, so it does **not** mean the product is already published. Poll
+[Get product](/api/api-reference/products/get-product) with your SKU to follow its status.
+
+The response does not include a product id. Nothing in this API takes one as input: reads, stock and
+price updates are all addressed by your own SKU.
+
+Values come back normalized rather than exactly as you sent them: identifier type names are
+uppercased and their values sorted, `condition` is uppercased, and `images` is a flat list of URLs
+instead of the objects you sent. `currency_code` and `description_language` are not echoed back.
 
 ## Example request
 
@@ -87,10 +140,13 @@ curl -X POST https://live.nocnocstore.com/api/v2/products \
   -d '{
     "sku": "SKU-001",
     "international_ids": { "gtin": ["4901234567890"] },
-    "brand": "BRAND",
     "available_quantity": 20,
     "price": 23,
     "currency_code": "USD",
+    "condition": "NEW",
+    "title": "Product Title",
+    "description": "Product description",
+    "description_language": "en",
     "package_dimensions": {
       "size": { "unit": "cm", "length": 46, "width": 28, "height": 15 },
       "weight": { "unit": "kg", "value": 3 }
@@ -99,15 +155,7 @@ curl -X POST https://live.nocnocstore.com/api/v2/products \
       "size": { "unit": "cm", "length": 42, "width": 26, "height": 13 },
       "weight": { "unit": "kg", "value": 2 }
     },
-    "images": [{ "source_url": "https://example.com/image.jpg" }],
-    "condition": "NEW",
-    "title": "Product Title",
-    "description_language": "en",
-    "description": "Product description",
-    "attributes": [
-      { "type": "COLOR", "value": "Red" },
-      { "type": "SIZE", "value": "Large" }
-    ]
+    "images": [{ "source_url": "https://example.com/image.jpg" }]
   }'
 ```
 
@@ -115,10 +163,9 @@ curl -X POST https://live.nocnocstore.com/api/v2/products \
 ```json 201
 {
   "sku": "SKU-001",
-  "brand": "BRAND",
+  "international_ids": { "GTIN": ["4901234567890"] },
   "available_quantity": 20,
   "price": 23,
-  "currency_code": "USD",
   "package_dimensions": {
     "size": { "unit": "cm", "width": 28, "height": 15, "length": 46 },
     "weight": { "value": 3, "unit": "kg" }
@@ -127,33 +174,20 @@ curl -X POST https://live.nocnocstore.com/api/v2/products \
     "size": { "unit": "cm", "width": 26, "height": 13, "length": 42 },
     "weight": { "value": 2, "unit": "kg" }
   },
-  "images": [{ "source_url": "https://example.com/image.jpg" }],
+  "images": ["https://example.com/image.jpg"],
   "condition": "NEW",
   "title": "Product Title",
-  "description_language": "en",
   "description": "Product description",
-  "attributes": [
-    { "type": "COLOR", "value": "Red" },
-    { "type": "SIZE", "value": "Large" }
-  ]
+  "status": "PENDING"
 }
 ```
 
 ```json 400
 {
-  "code": 400,
-  "message": "Invalid Request Payload.",
-  "errors": [
-    "Sku should be between 1 character minimum and 45 characters maximum.",
-    "Brand should be between 1 character minimum and 45 characters maximum."
-  ]
-}
-```
-
-```json 400
-{
-  "code": 400,
-  "message": "Sku already exists."
+  "error": "Validation failed",
+  "fields": {
+    "internationalIds": "At least one international identifier type is required."
+  }
 }
 ```
 
@@ -163,4 +197,104 @@ curl -X POST https://live.nocnocstore.com/api/v2/products \
   "message": "Unauthorized"
 }
 ```
+
+```json 502
+{
+  "message": "Internal Server Error"
+}
+```
 </ResponseExample>
+
+## Errors
+
+Validation errors come back with status `400` in one of two shapes, and neither creates the product —
+fix what is reported and retry the same request.
+
+**Field checks** — a required field is missing, or its type, length or range is wrong:
+
+```json
+{
+  "error": "Validation failed",
+  "fields": {
+    "internationalIds": "At least one international identifier type is required."
+  }
+}
+```
+
+**Business rules** — identifier format, unknown condition, duplicate SKU or duplicate identifier:
+
+```json
+{
+  "code": 400,
+  "message": "Invalid Request Payload.",
+  "errors": [
+    "GTIN identifier '123' must be numeric and between 12 and 14 digits.",
+    "Invalid condition: USED. Valid values: NEW, REFURBISHED_A_PLUS, REFURBISHED_A, OPEN_BOX"
+  ]
+}
+```
+
+A SKU you already created comes back in that same shape:
+
+```json
+{
+  "code": 400,
+  "message": "Invalid Request Payload.",
+  "errors": ["A seller_catalog with sku 'SKU-001' already exists for this seller."]
+}
+```
+
+In this second shape `message` is always `Invalid Request Payload.`; the detail is in `errors`, with
+one entry per problem found. Format problems are reported first: if any of them is present you will
+not see the duplicate-identifier check in the same response, so fix the format and send the request
+again to find out whether the identifier is free:
+
+```json
+{
+  "code": 400,
+  "message": "Invalid Request Payload.",
+  "errors": [
+    "Identifier GTIN '4901234567890' is already registered for this seller with condition NEW."
+  ]
+}
+```
+
+### Checks that run after you get the response
+
+A `201` with `status: "PENDING"` means the request passed the checks above — not that the product was
+created. Some rules are only applied in the step that follows, and when one of them fails the product
+is silently not created: no error reaches your integration, and the SKU never shows up in
+[Get product](/api/api-reference/products/get-product).
+
+These are the rules in that group:
+
+- no shipping weight can be worked out: `package_dimensions.size`, `product_dimensions.size` or
+  `package_dimensions.weight` missing from your request and not recoverable from the Amazon match
+  either
+- `available_quantity` above 9999
+- `price` with more than 2 decimal places
+- more than 10 images
+- `currency_code` other than `USD`, or `description_language` other than `en`
+- a SKU that does not start with a letter or a number
+- a GTIN, EAN, UPC or ASIN already used by another of your products. This check ignores `condition`,
+  so an identifier you reuse with a different condition passes the checks above and still ends up not
+  being created
+
+Because of this, always confirm a creation with [Get product](/api/api-reference/products/get-product)
+before treating the SKU as live.
+
+### 502
+
+A `502` means we could not confirm whether the product was created:
+
+```json
+{
+  "message": "Internal Server Error"
+}
+```
+
+Retry the same request: sending the same SKU again is safe, we reconcile it instead of creating a
+duplicate. If the product already exists on our side, that retry answers `400` with
+`A seller_catalog with sku '...' already exists for this seller.`; otherwise it answers `201` again,
+echoing the entry we had stored, so `package_dimensions`, `product_dimensions` and `images` come back
+as `null`. That does not mean the data was lost.
