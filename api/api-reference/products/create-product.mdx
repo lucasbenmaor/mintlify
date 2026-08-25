@@ -87,12 +87,13 @@ description: "Creates a new product and adds it to your catalog. Requires full p
 <ParamField body="product_dimensions" type="object">
   Dimensions of the product itself. Same structure as `package_dimensions`.
 
-  <Warning>
-    Send both objects, each with a valid `size`. They are optional in the contract, but we work out
-    the shipping weight from the two together, and today a product that arrives without them does not
-    get created — and no error comes back to say so. See
+  <Note>
+    Both objects are optional because we complete them from the Amazon listing matched by the
+    identifier you send: Amazon's values win, and whatever it does not carry is filled in from your
+    request. Send them when you can anyway — if we cannot match your product, or the match has no
+    dimensions, there is no shipping weight and the product is not created. See
     [Checks that run after you get the response](#checks-that-run-after-you-get-the-response).
-  </Warning>
+  </Note>
 </ParamField>
 
 <ParamField body="images" type="array">
@@ -267,9 +268,9 @@ is silently not created: no error reaches your integration, and the SKU never sh
 
 These are the rules in that group:
 
-- `package_dimensions` or `product_dimensions` missing, or without a valid `size`
-- `package_dimensions.weight` missing, unless the product carries an ASIN and we manage to recover
-  the weight from Amazon — the `size` is never recovered that way
+- no shipping weight can be worked out: `package_dimensions.size`, `product_dimensions.size` or
+  `package_dimensions.weight` missing from your request and not recoverable from the Amazon match
+  either
 - `available_quantity` above 9999
 - `price` with more than 2 decimal places
 - more than 10 images
