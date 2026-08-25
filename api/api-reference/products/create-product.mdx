@@ -78,22 +78,21 @@ description: "Creates a new product and adds it to your catalog. Requires full p
   Product description to be published. Cannot be empty. Leading and trailing spaces are trimmed.
 </ParamField>
 
-<ParamField body="package_dimensions" type="object" required>
+<ParamField body="package_dimensions" type="object">
   Dimensions of the package. Contains `size` (object with `unit`, `length`, `width`, `height`) and
   `weight` (object with `unit`, `value`). Size units: `cm`, `inch`, `inches`, `mm`. Weight units:
   `kg`, `lb`, `gram`, `kilogram`, `pound`. Every value must be greater than 0.
-
-  Both `size` and `weight` are needed here: the shipping weight is worked out from
-  `package_dimensions.weight`.
 </ParamField>
 
-<ParamField body="product_dimensions" type="object" required>
+<ParamField body="product_dimensions" type="object">
   Dimensions of the product itself. Same structure as `package_dimensions`.
 
-  <Note>
-    Both `package_dimensions` and `product_dimensions` must be sent, and both need a valid `size`. We
-    use the two together to work out the shipping weight, so sending only one is not enough.
-  </Note>
+  <Warning>
+    Send both objects, each with a valid `size`. They are optional in the contract, but we work out
+    the shipping weight from the two together, and today a product that arrives without them does not
+    get created — and no error comes back to say so. See
+    [Checks that run after you get the response](#checks-that-run-after-you-get-the-response).
+  </Warning>
 </ParamField>
 
 <ParamField body="images" type="array">
@@ -269,7 +268,8 @@ is silently not created: no error reaches your integration, and the SKU never sh
 These are the rules in that group:
 
 - `package_dimensions` or `product_dimensions` missing, or without a valid `size`
-- `package_dimensions.weight` missing
+- `package_dimensions.weight` missing, unless the product carries an ASIN and we manage to recover
+  the weight from Amazon — the `size` is never recovered that way
 - `available_quantity` above 9999
 - `price` with more than 2 decimal places
 - more than 10 images
